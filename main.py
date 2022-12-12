@@ -19,9 +19,21 @@ def python_morse_code_dictionary() -> dict:
         '0': '-----', '1': '.----', '2': '..---',
         '3': '...--', '4': '....-', '5': '.....',
         '6': '-....', '7': '--...', '8': '---..',
-        '9': '----.'
+        '9': '----.',
+
+        ' ': '/'
     }
     # source for this dictionary: https://stackoverflow.com/questions/32094525/morse-code-to-english-python3
+
+def translate_morse(sentence: str) -> str:
+    # translate given English string into Morse code, return the Morse code string
+    uppercase_sentence = sentence.upper() # we'll translate this string so there's no conflicts with the dictionary
+    morse_dictionary = python_morse_code_dictionary() # a copy of our Python Morse code dictionary
+    result = [] # each char's Morse counterpart goes here to form the full 'string'
+    for ch in uppercase_sentence:
+        morse_char = morse_dictionary[ch] # getting current char's Morse counterpart
+        result.append(morse_char) # adding current Morse char to 'result' list
+    return ' '.join(result) # join list of Morse chars into a space-separated string, return the result
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
