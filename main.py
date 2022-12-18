@@ -3,6 +3,9 @@
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
+import requests # 'requests' library for handling HTTP requests/responses in Python (HTTP responses tend to have HTML content)
+from bs4 import BeautifulSoup # 'BeautifulSoup' library for scraping websites for specific info
+
 def python_morse_code_dictionary() -> dict:
     # returns Python 'English to Morse Code' dictionary
     return {
@@ -34,6 +37,10 @@ def translate_morse(sentence: str) -> str:
         morse_char = morse_dictionary[ch] # getting current char's Morse counterpart
         result.append(morse_char) # adding current Morse char to 'result' list
     return ' '.join(result) # join list of Morse chars into a space-separated string, return the result
+
+def get_request(url: str):
+    # reads in website URL, returns its HTML content as a GET request
+    return requests.get(url).text
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
