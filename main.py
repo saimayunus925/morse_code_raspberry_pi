@@ -42,13 +42,31 @@ def get_request(url: str):
     # reads in website URL, returns its HTML content as a GET request
     return requests.get(url).text
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def scrape_webpage(url: str):
+    # objective: scrape info from given URL's webpage, get webpage title and contents, return this info
+    html_content = get_request(url) # step 1: read in website URL, get its HTML content using a GET request
+    webpage_content = [] # result list where webpage title and content will go
+    # step 2: create a BeautifulSoup instance. Then, pass it our URL's HTML content to be parsed with BeautifulSoup's LXML parser
+    tomato_soup = BeautifulSoup(html_content, 'lxml')
+    webpage_title = tomato_soup.find('head').find('title').text # step 3: get webpage's title from the 'head' tag
+    webpage_content.append(webpage_title) # step 4: add webpage title to list of webpage content
+    webpage_text = tomato_soup.find('body') # step 4: get webpage's text content (tags, info, etc.) from the 'body' tag
+    for content_tag in webpage_text.find_all(True):
+        # step 5: iterate through ALL tags in webpage body, extract text from each tag, add that text to 'webpage_content' list
+        current_text = tomato_soup.find_all(content_tag) # ALL matches for current HTML tag
+        if len(current_text) > 1:
+            # if length of 'current_text' list is over 1, then we have multiple matches for given tag
+            for str in current_text:
+                webpage_content.append(str.text) # append each tag's text
+        else:
+            # else, we either have one match or no matches for given tag
+            match = tomato_soup.find(content_tag).text
+            webpage_content.append(match) # append single match (or result of null) to result list
+    return webpage_content
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    scrape_webpage('http://google.com') # should print the title of given URL
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
