@@ -61,16 +61,23 @@ def read_url():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     URL = read_url() # reads in URL
-    content = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
-    webpage_title = content.
+    html = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
+    title = html[0] # title of webpage
+    content = html[1] # all tags and their info in webpage
+    print(f"WEBPAGE TITLE IN MORSE CODE: {translate_morse(title)}")
     for c in content:
         tag_name = c.name # name of current tag
         tag_text = c.text # text/content of current tag
         if tag_name == "head" or tag_name == "meta" or tag_name == "style": continue
         elif not tag_text: print("TAG TEXT: EMPTY")
+        else:
+            print(f"TAG NAME: {tag_name}")
+            morse_text = translate_morse(tag_text) # current tag's info in Morse code
+            print(f"TAG TEXT IN MORSE CODE: {morse_text}")
 
     # OK. Now that we can finally print all tags and their info from a webpage, we gotta filter out the metadata-type ones.
     # examples: <head>, <meta>, <style>, etc.
     # we should probably also filter out tags with no text in them, or just send a notice to the user that they're blank
+    # otherwise, translate tag's text to Morse code and print it
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
