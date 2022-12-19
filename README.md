@@ -61,7 +61,7 @@
     <li>
         Install the <i>requests</i> and <i>BeautifulSoup</i> libraries.
     </li>
-    <li>Clone this project.</li>
+    <li>Click the green button in the top-right of this project to get its 'git clone' URL for downloading purposes.</li>
     <li>Using the URL from Step 3, clone this project to your 
     machine.</li>
     <li>Head over to the project directory; make sure the <i>main.py</i> file 
