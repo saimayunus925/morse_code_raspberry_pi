@@ -56,9 +56,8 @@ def scrape_webpage(url: str):
     webpage_content = [] # result list where webpage title and content will go
     # step 2: create a BeautifulSoup instance. Then, pass it our URL's HTML content to be parsed with BeautifulSoup's LXML parser
     tomato_soup = BeautifulSoup(html_content, 'lxml')
-    webpage_title = tomato_soup.find('head').find('title').text # step 3: get title of webpage
     webpage_content = tomato_soup.find_all(True) # step 3: get ALL tags from webpage
-    return (webpage_title, webpage_content)
+    return webpage_content
 
 def read_url():
     # reads in URL string and returns it
@@ -69,14 +68,11 @@ def read_url():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     URL = read_url() # reads in URL
-    html = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
-    title = html[0] # title of webpage
-    content = html[1] # all tags and their info in webpage
-    print(f"WEBPAGE TITLE IN MORSE CODE: {translate_morse(title)}")
+    content = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
     for c in content:
         tag_name = c.name # name of current tag
         tag_text = c.text # text/content of current tag
-        if tag_name == "head" or tag_name == "meta" or tag_name == "style": continue
+        if tag_name == "head" or tag_name == "meta" or tag_name == "style" or tag_name == "html": continue
         elif not tag_text: print("TAG TEXT: EMPTY")
         else:
             print(f"TAG NAME: {tag_name}")
