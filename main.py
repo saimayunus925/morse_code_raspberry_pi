@@ -24,9 +24,13 @@ def python_morse_code_dictionary() -> dict:
         '6': '-....', '7': '--...', '8': '---..',
         '9': '----.',
 
-        ' ': '/'
+        ' ': '/', '.': '.-.-.-', ',': '--..--',
+        '?': '..--..', ';': '-.-.-.', ':': '---...',
+        '-': '-....-', '/': '-..-.', "'": '.----.',
+        '"': '.-..-.'
     }
     # source for this dictionary: https://stackoverflow.com/questions/32094525/morse-code-to-english-python3
+    # source 2 to double-check and update ths dictionary: https://the-daily-dabble.com/morse-code-numbers-punctuation
 
 def translate_morse(sentence: str) -> str:
     # translate given English string into Morse code, return the Morse code string
