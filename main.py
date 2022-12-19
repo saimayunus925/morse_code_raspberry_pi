@@ -4,7 +4,7 @@
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 import requests # 'requests' library for handling HTTP requests/responses in Python (HTTP responses tend to have HTML content)
-from bs4 import BeautifulSoup # 'BeautifulSoup' library for scraping websites for specific info
+from bs4 import BeautifulSoup # 'BeautifulSoup' library for scraping websites for specific info'
 
 def python_morse_code_dictionary() -> dict:
     # returns Python 'English to Morse Code' dictionary
@@ -51,10 +51,16 @@ def scrape_webpage(url: str):
     webpage_content = tomato_soup.find_all(True) # step 3: get ALL tags from webpage
     return webpage_content
 
+def read_url():
+    # reads in URL string and returns it
+    url = input("Enter a URL: ")
+    return url
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    content = scrape_webpage('https://www.iana.org/domains/reserved') # gets all tags and their info of given URL's webpage
+    URL = read_url() # reads in URL
+    content = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
     for c in content:
         print(f"TAG: {c}")
 
