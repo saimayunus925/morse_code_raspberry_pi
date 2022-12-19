@@ -48,8 +48,9 @@ def scrape_webpage(url: str):
     webpage_content = [] # result list where webpage title and content will go
     # step 2: create a BeautifulSoup instance. Then, pass it our URL's HTML content to be parsed with BeautifulSoup's LXML parser
     tomato_soup = BeautifulSoup(html_content, 'lxml')
+    webpage_title = tomato_soup.find('head').find('title').text # step 3: get title of webpage
     webpage_content = tomato_soup.find_all(True) # step 3: get ALL tags from webpage
-    return webpage_content
+    return (webpage_title, webpage_content)
 
 def read_url():
     # reads in URL string and returns it
@@ -61,8 +62,15 @@ def read_url():
 if __name__ == '__main__':
     URL = read_url() # reads in URL
     content = scrape_webpage(URL) # gets all tags and their info of given URL's webpage
+    webpage_title = content.
     for c in content:
-        print(f"TAG: {c}")
+        tag_name = c.name # name of current tag
+        tag_text = c.text # text/content of current tag
+        if tag_name == "head" or tag_name == "meta" or tag_name == "style": continue
+        elif not tag_text: print("TAG TEXT: EMPTY")
 
+    # OK. Now that we can finally print all tags and their info from a webpage, we gotta filter out the metadata-type ones.
+    # examples: <head>, <meta>, <style>, etc.
+    # we should probably also filter out tags with no text in them, or just send a notice to the user that they're blank
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
