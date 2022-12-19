@@ -72,16 +72,15 @@ if __name__ == '__main__':
     for c in content:
         tag_name = c.name # name of current tag
         tag_text = c.text # text/content of current tag
+        # Now that we can finally print all tags and their info from a webpage, we gotta filter out the metadata-type ones.
+        # examples: <head>, <meta>, <style>, etc.
         if tag_name == "head" or tag_name == "meta" or tag_name == "style" or tag_name == "html": continue
+        # we should probably also filter out tags with no text in them, or just send a notice to the user that they're blank
+        # otherwise, translate tag's text to Morse code and print it
         elif not tag_text: print("TAG TEXT: EMPTY")
         else:
             print(f"TAG NAME: {tag_name}")
             morse_text = translate_morse(tag_text) # current tag's info in Morse code
             print(f"TAG TEXT IN MORSE CODE: {morse_text}")
-
-    # OK. Now that we can finally print all tags and their info from a webpage, we gotta filter out the metadata-type ones.
-    # examples: <head>, <meta>, <style>, etc.
-    # we should probably also filter out tags with no text in them, or just send a notice to the user that they're blank
-    # otherwise, translate tag's text to Morse code and print it
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
